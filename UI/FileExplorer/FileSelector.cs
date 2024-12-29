@@ -36,7 +36,9 @@ public partial class FileSelector : Control
     }
 
 	public void populate()
-    {
+	{
+		needsRefresh = false;
+
 		if (pfs == null) { return; }
 
 		foreach(var child in fileList.GetChildren())
@@ -72,8 +74,6 @@ public partial class FileSelector : Control
 			fe.ButtonGroup = entryButtonGroup;
 			fileList.AddChild(fe);
         }
-
-		needsRefresh = false;
     }
 
 	public FileType GetFileType(string fileName)

@@ -13,11 +13,6 @@ namespace EldanToolkit.Project
 
         public string ProjectPath { get; private set; }
 
-        public string ProjectFilePath
-        {
-            get => Path.Join(ProjectPath, "Project.xml");
-        }
-
         private Project()
 		{
 			FileSystem = new ProjectFileSystem(this);
@@ -66,7 +61,7 @@ namespace EldanToolkit.Project
         {
             ProjectPath = path;
 
-            if (!File.Exists(ProjectFilePath))
+            if (!Directory.Exists(ProjectPath))
                 return false;
 
             FileSystem.projectPath = path;
