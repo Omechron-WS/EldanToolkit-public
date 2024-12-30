@@ -19,20 +19,25 @@ public partial class EntryListElement : VBoxContainer
 	public delegate void SelectionChangedEvent(uint? id);
 	public SelectionChangedEvent SelectionChanged;
 
+	public uint? SelectedID { get; private set; }
+
 	public override void _Ready()
 	{
-		base._Ready();
-
 		buttonGroup = new ButtonGroup();
 
 		EntryList = GetNode<LongButtonListControl>("%EntryList");
+		Refresh();
 	}
 
-	public void SetList(IEnumerable<KeyValuePair<uint, DataRow>> list)
+	public void Refresh()
 	{
+		// Good place to add any filters.
+		OrderedList = DataSet?.GetTable(TableName)?.GetRowList()?.OrderBy(r => r.Key).ToList();
+		if (OrderedList == null) return;
+
 		TableStructure ts = TableStructure.GetStructure(TableName);
 
-		var objectList = list.Cast<object>().ToList();
+		var objectList = OrderedList.Cast<object>().ToList();
 		EntryList.LoadData(objectList, (control, entry, id) =>
 		{
 			var pair = (KeyValuePair<uint, DataRow>)entry;
@@ -41,7 +46,16 @@ public partial class EntryListElement : VBoxContainer
 			button.Text = ts.GetEntryDescriptionFormatted(pair.Value, DataSet);
 			button.ToggleMode = true;
 			button.ButtonGroup = buttonGroup;
-			button.Pressed += () => SelectionChanged?.Invoke(pair.Key);
+			button.Pressed += () => ButtonPressed(pair.Key, button.ButtonPressed);
 		});
+	}
+
+	private void ButtonPressed(uint id, bool pressed)
+	{
+		if (pressed)
+			SelectedID = id;
+		else
+			SelectedID = null;
+		SelectionChanged?.Invoke(SelectedID);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EldanToolkit.Shared;
+using System;
 
 namespace EldanToolkit.Project
 {
@@ -7,8 +8,11 @@ namespace EldanToolkit.Project
         public delegate void FileSystemLoadedEventHandler();
 		public static FileSystemLoadedEventHandler FileSystemChanged;
 
-        public delegate void RecentProjectsUpdatedEventHandler();
-        public static RecentProjectsUpdatedEventHandler RecentProjectsUpdated;
+		public delegate void RecentProjectsUpdatedEventHandler();
+		public static RecentProjectsUpdatedEventHandler RecentProjectsUpdated;
+
+		public delegate void TableEntryChangedEventHandler(GameTableName tableName, uint uid);
+		public static TableEntryChangedEventHandler TableEntryChanged;
 
 	}
 }

@@ -21,7 +21,7 @@ public partial class TableEditorTab : VBoxContainer
 
 	private TableViewReference CurrentTable;
 	private DataTable TableRef;
-	private int? CurrentEntryID = null;
+	private uint? CurrentEntryID = null;
 
 	[Export]
 	public PackedScene EntryCell;
@@ -48,6 +48,7 @@ public partial class TableEditorTab : VBoxContainer
 		UpdateTableSelector();
 
 		ProjectHolder.ProjectObservable.Subscribe(ProjectChanged);
+		Events.TableEntryChanged += OnEntryChanged;
 	}
 
 	public void ProjectChanged(Project project)
@@ -115,19 +116,17 @@ public partial class TableEditorTab : VBoxContainer
 
 		TableEntryList.DataSet = Project.TableMods;
 		TableEntryList.TableName = table.NameEnum;
-		UpdateListCache();
+		TableEntryList.Refresh();
 	}
 
-	private void UpdateListCache()
+	public void OnEntryChanged(GameTableName tableName, uint uid)
 	{
-		// Good place to add any filters.
-		TableEntryList.SetList(TableRef.GetRowList().OrderBy(r => r.Key));
+		if (uid == CurrentEntryID)
+			Refresh();
 	}
 
-	public void SelectEntry(uint? id)
+	public void Refresh()
 	{
-		if (id == CurrentEntryID) return;
-
 		// Clear
 		foreach (var child in EntryEditor.GetChildren())
 		{
@@ -135,17 +134,26 @@ public partial class TableEditorTab : VBoxContainer
 			EntryEditor.RemoveChild(child);
 		}
 
-		if (id == null || TableRef == null) return;
+		if (CurrentEntryID == null || TableRef == null) return;
 
 		TableStructure structure = TableStructure.GetStructure(TableRef.TableName);
 
-		DataRow row = TableRef.GetRow(id.Value);
+		DataRow row = TableRef.GetRow(CurrentEntryID.Value);
 
-		foreach(var column in TableRef.schema)
+		foreach (var column in TableRef.schema)
 		{
 			if (column.Key == "UID") continue;
-			EntryEditor.AddChild(CreateVariableCell(id.Value, Project.TableMods, CurrentTable.NameEnum, column.Key));
+			EntryEditor.AddChild(CreateVariableCell(CurrentEntryID.Value, Project.TableMods, CurrentTable.NameEnum, column.Key));
 		}
+	}
+
+	public void SelectEntry(uint? id)
+	{
+		if (id == CurrentEntryID) return;
+
+		CurrentEntryID = id;
+
+		Refresh();
 	}
 
 	private Control CreateVariableCell(uint id, TableDataSet set, GameTableName tableName, string column)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://br0f1ejwtn01f"]
+
+[ext_resource type="Script" path="res://UI/TableEditor/ReferenceDropdownList.cs" id="1_ccthw"]
+[ext_resource type="PackedScene" uid="uid://bde0cloeunvm8" path="res://UI/TableEditor/EntryList.tscn" id="2_y5065"]
+
+[node name="ReferenceDropdown" type="PopupPanel"]
+size = Vector2i(208, 343)
+visible = true
+script = ExtResource("1_ccthw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 204.0
+offset_bottom = 339.0
+
+[node name="EntryList" parent="VBoxContainer" instance=ExtResource("2_y5065")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+
+[node name="AcceptButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Accept"
