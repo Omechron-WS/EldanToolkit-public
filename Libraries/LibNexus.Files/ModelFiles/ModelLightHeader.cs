@@ -1,3 +1,5 @@
+using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 using LibNexus.Core.Extensions;
 using System;
 using System.IO;
@@ -8,56 +10,63 @@ namespace LibNexus.Files.ModelFiles;
 
 public class ModelLightHeader
 {
-	byte[] fullData;
-	public ushort BigData { get; }
+	public ushort unkDBID { get; } // Signature?
+	public ushort BigData { get; } // Seems to be involved in multiple lights in one model?
+	public short unk01;
+	public short unk02;
+	public short unk03;
+	public short[] values1; //39 array size
 	public Vector4 UnkVec { get; }
 	public Vector3 Color { get; }
-	public ModelChunk Unk2 { get; }
-	public ulong AnimationKeyframes { get; }
-    public uint[] AnimationTimes { get; }
-    public Half[] AnimationValues { get; }
+	public AnimationTrackChunk Track1 { get; }
+	public AnimationTrackChunk Track2 { get; }
+	public AnimationTrackChunk Track3 { get; }
 
-    public ModelLightHeader(Stream stream, ulong length)
+	public short[] values2; // 60 array size
+
+	public AnimationTrackChunk Track4 { get; }
+	public AnimationTrackChunk Track5 { get; }
+	public AnimationTrackChunk Track6 { get; }
+
+	public short[] values3; // 24 array size
+
+	public ModelLightHeader(Stream stream)
 	{
-		// Should be 552 bytes?
-		fullData = stream.ReadBytes(length);
-
-		stream.Position = 4;
+		unkDBID = stream.ReadUInt16();
 		BigData = stream.ReadUInt16();
-		stream.Position += BigData * 400;
+		unk01 = stream.ReadInt16();
+		unk02 = stream.ReadInt16();
+		unk03 = stream.ReadInt16();
 
-        UnkVec = new Vector4(stream.ReadByte() / 255f, stream.ReadByte() / 255f, stream.ReadByte() / 255f, stream.ReadByte() / 255f);
-
-        stream.Position = 88;
-		//Unk2 = new ModelChunk(stream.ReadUInt64(), stream.ReadUInt64());
-
-		stream.Position = 448;
-		Color = new Vector3(stream.ReadByte() / 255f, stream.ReadByte() / 255f, stream.ReadByte() / 255f);
-
-		stream.Position = 136;
-		AnimationKeyframes = stream.ReadUInt64();
-		stream.Position = 432;
-		AnimationTimes = new uint[AnimationKeyframes];
-		for(var i = 0u; i < AnimationKeyframes; i++)
+		values1 = new short[39];
+		for (int i = 0; i < 39; i++)
 		{
-			AnimationTimes[i] = stream.ReadUInt32();
+			values1[i] = stream.ReadInt16();
 		}
-		stream.SkipPadding(16);
 
-		AnimationValues = new Half[AnimationKeyframes];
-		for(var i = 0u; i < AnimationKeyframes; i++)
+		Track1 = new AnimationTrackChunk(stream);
+		Track2 = new AnimationTrackChunk(stream);
+		Track3 = new AnimationTrackChunk(stream);
+
+		values1 = new short[60];
+		for (int i = 0; i < 60; i++)
 		{
-			AnimationValues[i] = stream.ReadHalf();
+			values1[i] = stream.ReadInt16();
 		}
-		stream.SkipPadding(16);
 
+		Track4 = new AnimationTrackChunk(stream);
+		Track5 = new AnimationTrackChunk(stream);
+		Track6 = new AnimationTrackChunk(stream);
 
-        // Vector at 416?
+		values1 = new short[24];
+		for (int i = 0; i < 24; i++)
+		{
+			values1[i] = stream.ReadInt16();
+		}
+	}
 
-        // Repeating pattern, 280, 304, 328. Does not seem to shift.
-
-        // Repeating pattern, 416, 448, 480, 512, 544, 576, 608. Not always there. Found at 576, 608, 640 in soft_throb
-		// Pattern 432 - 508, 4 bytes. 19 units. 136 has a 19.
-		// 508-512 is padding?
+	public static void Goto(Stream stream, string field, ulong position)
+	{
+		stream.Goto<ModelLightHeader>(field, position, Model.Debug);
 	}
 }

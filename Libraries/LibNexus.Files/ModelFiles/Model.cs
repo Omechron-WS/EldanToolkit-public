@@ -1,4 +1,5 @@
 using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 using LibNexus.Core.Extensions;
 using LibNexus.Core.Streams;
 using System.Collections.Generic;
@@ -342,17 +343,23 @@ public class Model
 	{
 		Goto(stream, nameof(_header.Lights), _header.Lights.Offset);
 
-		var lights = new ModelLight[_header.Lights.Count];
+		var headers = new ModelLightHeader[_header.Lights.Count];
 
-        using var lightStream = new SegmentStream(stream);
+		for (var i = 0UL; i < _header.Lights.Count; i++)
+		{
+			headers[i] = new ModelLightHeader(stream);
+			stream.SkipPadding(16);
+		}
 
-        for (var i = 0UL; i < _header.Lights.Count; i++)
-        {
-            var geometry = new ModelLight(lightStream, _header.Unk44.Offset - _header.Lights.Offset);
-            lightStream.SkipPadding(16);
-            lights[i] = geometry;
-        }
+		using var animationsStream = new SegmentStream(stream);
+		var animations = new ModelLightAnimation[_header.Lights.Count];
 
-        return lights;
+		for (var i = 0UL; i < _header.Lights.Count; i++)
+		{
+			animations[i] = new ModelLightAnimation(animationsStream, headers[i]);
+			stream.SkipPadding(16);
+		}
+
+		return Enumerable.Range(0, (int)_header.Bones.Count).Select(i => new ModelLight(headers[i], animations[i])).ToArray();
 	}
 }

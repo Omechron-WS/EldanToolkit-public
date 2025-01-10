@@ -164,7 +164,7 @@ namespace EldanToolkit.Project
 
         public bool AddtoProject(string path)
         {
-            return ExtractFileToLocation(path, Path.Combine(projectFilesPath, Path.GetDirectoryName(path)));
+            return ExtractFileToLocation(path, Path.Combine(projectFilesPath, path));
         }
 
         public void RemoveFromProject(string path)

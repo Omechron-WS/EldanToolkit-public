@@ -1,4 +1,5 @@
 using EldanToolkit.Libraries.LibNexus.Files;
+using Godot;
 using LibNexus.Core.Extensions;
 using System;
 using System.IO;
@@ -9,137 +10,137 @@ public class ModelBoneAnimation
 {
 	public ModelBoneAnimation(Stream stream, ModelBoneHeader header)
 	{
-		if (header.Animation1Entries != 0)
+		if (header.Animation1.FrameCount != 0)
 		{
-			Goto(stream, nameof(header.Animation1TimeOffset), header.Animation1TimeOffset);
-			for(ulong i = 0; i < header.Animation1Entries; i++)
+			Goto(stream, nameof(header.Animation1.TimestampOffset), header.Animation1.TimestampOffset);
+			for(ulong i = 0; i < header.Animation1.FrameCount; i++)
             {
                 UInt32 data = stream.ReadUInt32(); // TODO
             }
 			stream.SkipPadding(16);
 
-            Goto(stream, nameof(header.Animation1ValueOffset), header.Animation1ValueOffset);
-            for (ulong i = 0; i < header.Animation1Entries; i++)
+            Goto(stream, nameof(header.Animation1.ValueOffset), header.Animation1.ValueOffset);
+            for (ulong i = 0; i < header.Animation1.FrameCount; i++)
             {
                 byte[] data = stream.ReadBytes(6); // TODO
             }
             stream.SkipPadding(16);
         }
 
-        if (header.Animation2Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation2TimeOffset), header.Animation2TimeOffset);
-            for (ulong i = 0; i < header.Animation2Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
-            stream.SkipPadding(16);
-
-            Goto(stream, nameof(header.Animation2ValueOffset), header.Animation2ValueOffset);
-            for (ulong i = 0; i < header.Animation2Entries; i++)
-            {
-                byte[] data = stream.ReadBytes(6); // TODO
-            }
-            stream.SkipPadding(16);
-        }
-
-        if (header.Animation3Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation3TimeOffset), header.Animation3TimeOffset);
-            for (ulong i = 0; i < header.Animation3Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
-            stream.SkipPadding(16);
-
-            Goto(stream, nameof(header.Animation3ValueOffset), header.Animation3ValueOffset);
-            for (ulong i = 0; i < header.Animation3Entries; i++)
-            {
-                byte[] data = stream.ReadBytes(6); // TODO
-            }
-            stream.SkipPadding(16);
-        }
-
-        if (header.Animation4Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation4TimeOffset), header.Animation4TimeOffset);
-            for (ulong i = 0; i < header.Animation4Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
-            stream.SkipPadding(16);
-
-            Goto(stream, nameof(header.Animation4ValueOffset), header.Animation4ValueOffset);
-            for (ulong i = 0; i < header.Animation4Entries; i++)
-            {
-                byte[] data = stream.ReadBytes(6); // TODO
-            }
-            stream.SkipPadding(16);
-        }
-
-		if (header.Animation5Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation5TimeOffset), header.Animation5TimeOffset);
-            for (ulong i = 0; i < header.Animation5Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
+        if (header.Animation2.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation2.TimestampOffset), header.Animation2.TimestampOffset);
+			for (ulong i = 0; i < header.Animation2.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
 			stream.SkipPadding(16);
 
-            Goto(stream, nameof(header.Animation5ValueOffset), header.Animation5ValueOffset);
-            for (ulong i = 0; i < header.Animation5Entries; i++)
-            {
+			Goto(stream, nameof(header.Animation2.ValueOffset), header.Animation2.ValueOffset);
+			for (ulong i = 0; i < header.Animation2.FrameCount; i++)
+			{
+                byte[] data = stream.ReadBytes(6); // TODO
+            }
+            stream.SkipPadding(16);
+        }
+
+        if (header.Animation3.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation3.TimestampOffset), header.Animation3.TimestampOffset);
+			for (ulong i = 0; i < header.Animation3.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
+			stream.SkipPadding(16);
+
+			Goto(stream, nameof(header.Animation3.ValueOffset), header.Animation3.ValueOffset);
+			for (ulong i = 0; i < header.Animation3.FrameCount; i++)
+			{
+                byte[] data = stream.ReadBytes(6); // TODO
+            }
+            stream.SkipPadding(16);
+        }
+
+        if (header.Animation4.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation4.TimestampOffset), header.Animation4.TimestampOffset);
+			for (ulong i = 0; i < header.Animation4.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
+			stream.SkipPadding(16);
+
+			Goto(stream, nameof(header.Animation4.ValueOffset), header.Animation4.ValueOffset);
+			for (ulong i = 0; i < header.Animation4.FrameCount; i++)
+			{
+                byte[] data = stream.ReadBytes(6); // TODO
+            }
+            stream.SkipPadding(16);
+        }
+
+		if (header.Animation5.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation5.TimestampOffset), header.Animation5.TimestampOffset);
+			for (ulong i = 0; i < header.Animation5.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
+			stream.SkipPadding(16);
+
+			Goto(stream, nameof(header.Animation5.ValueOffset), header.Animation5.ValueOffset);
+			for (ulong i = 0; i < header.Animation5.FrameCount; i++)
+			{
                 byte[] data = stream.ReadBytes(8); // TODO
             }
 			stream.SkipPadding(16);
         }
 
-        if (header.Animation6Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation6TimeOffset), header.Animation6TimeOffset);
-            for (ulong i = 0; i < header.Animation6Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
-            stream.SkipPadding(16);
+        if (header.Animation6.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation6.TimestampOffset), header.Animation6.TimestampOffset);
+			for (ulong i = 0; i < header.Animation6.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
+			stream.SkipPadding(16);
 
-            Goto(stream, nameof(header.Animation6ValueOffset), header.Animation6ValueOffset);
-            for (ulong i = 0; i < header.Animation6Entries; i++)
-            {
+			Goto(stream, nameof(header.Animation6.ValueOffset), header.Animation6.ValueOffset);
+			for (ulong i = 0; i < header.Animation6.FrameCount; i++)
+			{
                 byte[] data = stream.ReadBytes(8); // TODO
             }
             stream.SkipPadding(16);
         }
 
-		if (header.Animation7Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation7TimeOffset), header.Animation7TimeOffset);
-            for (ulong i = 0; i < header.Animation7Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
-            stream.SkipPadding(16);
+		if (header.Animation7.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation7.TimestampOffset), header.Animation7.TimestampOffset);
+			for (ulong i = 0; i < header.Animation7.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
+			stream.SkipPadding(16);
 
-            Goto(stream, nameof(header.Animation7ValueOffset), header.Animation7ValueOffset);
-            for (ulong i = 0; i < header.Animation7Entries; i++)
-            {
+			Goto(stream, nameof(header.Animation7.ValueOffset), header.Animation7.ValueOffset);
+			for (ulong i = 0; i < header.Animation7.FrameCount; i++)
+			{
                 byte[] data = stream.ReadBytes(12); // TODO
             }
             stream.SkipPadding(16);
 		}
 
-        if (header.Animation8Entries != 0)
-        {
-            Goto(stream, nameof(header.Animation8TimeOffset), header.Animation8TimeOffset);
-            for (ulong i = 0; i < header.Animation8Entries; i++)
-            {
-                UInt32 data = stream.ReadUInt32(); // TODO
-            }
-            stream.SkipPadding(16);
+        if (header.Animation8.FrameCount != 0)
+		{
+			Goto(stream, nameof(header.Animation8.TimestampOffset), header.Animation8.TimestampOffset);
+			for (ulong i = 0; i < header.Animation8.FrameCount; i++)
+			{
+				UInt32 data = stream.ReadUInt32(); // TODO
+			}
+			stream.SkipPadding(16);
 
-            Goto(stream, nameof(header.Animation8ValueOffset), header.Animation8ValueOffset);
-            for (ulong i = 0; i < header.Animation8Entries; i++)
-            {
+			Goto(stream, nameof(header.Animation8.ValueOffset), header.Animation8.ValueOffset);
+			for (ulong i = 0; i < header.Animation8.FrameCount; i++)
+			{
                 byte[] data = stream.ReadBytes(12); // TODO
             }
             stream.SkipPadding(16);
