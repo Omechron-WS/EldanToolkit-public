@@ -1,9 +1,10 @@
-using LibNexus.Core.Extensions;
-using LibNexus.Core.Streams;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Streams;
+using EldanToolkit.Libraries.LibNexus.Files;
 using System;
 using System.IO;
 
-namespace LibNexus.Files.TextureFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TextureFiles;
 
 public class Texture
 {
@@ -136,10 +137,10 @@ public class Texture
 			var bg = stream.ReadUInt8();
 			var ra = stream.ReadUInt8();
 
-			pixels[i * 4 + 0] = (byte)(((ra & 0xF0) << 0) | ((ra & 0xF0) << 4));
-			pixels[i * 4 + 1] = (byte)(((bg & 0x0F) << 0) | ((bg & 0x0F) << 4));
-			pixels[i * 4 + 2] = (byte)(((bg & 0xF0) << 0) | ((bg & 0xF0) << 4));
-			pixels[i * 4 + 3] = (byte)(((ra & 0x0F) << 0) | ((ra & 0x0F) << 4));
+			pixels[i * 4 + 0] = (byte)((ra & 0xF0) << 0 | (ra & 0xF0) << 4);
+			pixels[i * 4 + 1] = (byte)((bg & 0x0F) << 0 | (bg & 0x0F) << 4);
+			pixels[i * 4 + 2] = (byte)((bg & 0xF0) << 0 | (bg & 0xF0) << 4);
+			pixels[i * 4 + 3] = (byte)((ra & 0x0F) << 0 | (ra & 0x0F) << 4);
 		}
 
 		return pixels;
@@ -208,7 +209,7 @@ public class Texture
 					for (var i = 0; i < 8; i++)
 						alphas[i] <<= 24;
 
-					da = stream.ReadUInt32() | ((ulong)stream.ReadUInt16() << 32);
+					da = stream.ReadUInt32() | (ulong)stream.ReadUInt16() << 32;
 				}
 				else
 					alphas[0] = 0xFF000000;
@@ -217,24 +218,24 @@ public class Texture
 				var color2 = stream.ReadUInt16();
 				var dc = stream.ReadUInt32();
 
-				var r0 = (byte)(((color1 & 0xf800) >> 8) | ((color1 & 0xf800) >> 13));
-				var g0 = (byte)(((color1 & 0x07e0) >> 3) | ((color1 & 0x07e0) >> 9));
-				var b0 = (byte)(((color1 & 0x001f) << 3) | ((color1 & 0x001f) >> 2));
+				var r0 = (byte)((color1 & 0xf800) >> 8 | (color1 & 0xf800) >> 13);
+				var g0 = (byte)((color1 & 0x07e0) >> 3 | (color1 & 0x07e0) >> 9);
+				var b0 = (byte)((color1 & 0x001f) << 3 | (color1 & 0x001f) >> 2);
 
-				var r1 = (byte)(((color2 & 0xf800) >> 8) | ((color2 & 0xf800) >> 13));
-				var g1 = (byte)(((color2 & 0x07e0) >> 3) | ((color2 & 0x07e0) >> 9));
-				var b1 = (byte)(((color2 & 0x001f) << 3) | ((color2 & 0x001f) >> 2));
+				var r1 = (byte)((color2 & 0xf800) >> 8 | (color2 & 0xf800) >> 13);
+				var g1 = (byte)((color2 & 0x07e0) >> 3 | (color2 & 0x07e0) >> 9);
+				var b1 = (byte)((color2 & 0x001f) << 3 | (color2 & 0x001f) >> 2);
 
-				colors[0] = ((uint)b0 << 16) | ((uint)g0 << 8) | r0;
-				colors[1] = ((uint)b1 << 16) | ((uint)g1 << 8) | r1;
+				colors[0] = (uint)b0 << 16 | (uint)g0 << 8 | r0;
+				colors[1] = (uint)b1 << 16 | (uint)g1 << 8 | r1;
 
 				if (color1 > color2)
 				{
-					colors[2] = ((uint)((b0 * 2 + b1) / 3) << 16) | ((uint)((g0 * 2 + g1) / 3) << 8) | (uint)((r0 * 2 + r1) / 3);
-					colors[3] = ((uint)((b0 + b1 * 2) / 3) << 16) | ((uint)((g0 + g1 * 2) / 3) << 8) | (uint)((r0 + r1 * 2) / 3);
+					colors[2] = (uint)((b0 * 2 + b1) / 3) << 16 | (uint)((g0 * 2 + g1) / 3) << 8 | (uint)((r0 * 2 + r1) / 3);
+					colors[3] = (uint)((b0 + b1 * 2) / 3) << 16 | (uint)((g0 + g1 * 2) / 3) << 8 | (uint)((r0 + r1 * 2) / 3);
 				}
 				else
-					colors[2] = ((uint)((b0 + b1) / 2) << 16) | ((uint)((g0 + g1) / 2) << 8) | (uint)((r0 + r1) / 2);
+					colors[2] = (uint)((b0 + b1) / 2) << 16 | (uint)((g0 + g1) / 2) << 8 | (uint)((r0 + r1) / 2);
 
 				for (var i = 0; i < 16; i++, da >>= 3, dc >>= 2)
 					buffer[i] = alphas[da & 7] | colors[dc & 3];

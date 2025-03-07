@@ -1,12 +1,12 @@
 ﻿using EldanToolkit.Project;
 using EldanToolkit.Shared;
+using EldanToolkit.WildStar.TestBed.GameTable;
+using EldanToolkit.WildStar.TestBed.TextTable;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.XPath;
-using WildStar.GameTable;
-using WildStar.TextTable;
 
 public class TableModManager : TableDataSet
 {

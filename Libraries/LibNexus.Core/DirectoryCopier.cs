@@ -1,4 +1,4 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LibNexus.Core;
+namespace EldanToolkit.Libraries.LibNexus.Core;
 
 public class DirectoryCopier
 {

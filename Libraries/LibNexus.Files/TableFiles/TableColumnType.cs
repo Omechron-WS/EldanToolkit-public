@@ -1,4 +1,4 @@
-namespace LibNexus.Files.TableFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
 public enum TableColumnType : uint
 {

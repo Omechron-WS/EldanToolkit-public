@@ -1,10 +1,10 @@
-﻿using LibNexus.Core.Extensions;
+﻿using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace LibNexus.Files;
+namespace EldanToolkit.Libraries.LibNexus.Files;
 
 public readonly struct Hash : IEquatable<Hash>
 {

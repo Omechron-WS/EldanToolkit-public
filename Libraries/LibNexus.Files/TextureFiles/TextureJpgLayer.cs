@@ -1,4 +1,4 @@
-namespace LibNexus.Files.TextureFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TextureFiles;
 
 // TODO why is Replacement unused?!
 // TODO why is layer 0 never used but only 2 and 3?!

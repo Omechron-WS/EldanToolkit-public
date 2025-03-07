@@ -1,7 +1,7 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System.IO;
 
-namespace LibNexus.Files.TranslationsFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TranslationsFiles;
 
 public class TranslationHeader
 {

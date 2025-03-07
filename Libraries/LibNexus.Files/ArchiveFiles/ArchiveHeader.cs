@@ -1,8 +1,8 @@
-﻿using LibNexus.Core.Extensions;
+﻿using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.IO;
 
-namespace LibNexus.Files.ArchiveFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ArchiveFiles;
 
 public class ArchiveHeader
 {

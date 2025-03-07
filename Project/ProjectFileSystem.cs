@@ -1,7 +1,8 @@
-﻿using Godot;
-using LibNexus.Core;
-using LibNexus.Files;
-using LibNexus.Files.ModelFiles;
+﻿using EldanToolkit.Libraries.LibNexus.Core;
+using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
+using EldanToolkit.Project.ImportFiles;
+using Godot;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EldanToolkit.Project
 {
-    public class ProjectFileSystem
+	public class ProjectFileSystem
 	{
 		public Project CurrentProject { get; private set; }
 		

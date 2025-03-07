@@ -1,5 +1,6 @@
-using LibNexus.Core;
-using LibNexus.Files.PackFiles;
+using EldanToolkit.Libraries.LibNexus.Core;
+using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Files.PackFiles;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LibNexus.Files.IndexFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.IndexFiles;
 
 public class Index : IDisposable
 {
@@ -328,10 +329,10 @@ public class Index : IDisposable
 		{
 			_fileReferences.Remove(file.Hash);
 		}
-        _fileReferences.Remove(file.Hash);
+		_fileReferences.Remove(file.Hash);
 
-        file.Hash = hash;
-        _fileReferences.TryAdd(hash, 0);
+		file.Hash = hash;
+		_fileReferences.TryAdd(hash, 0);
 		_fileReferences[hash]++;
 	}
 

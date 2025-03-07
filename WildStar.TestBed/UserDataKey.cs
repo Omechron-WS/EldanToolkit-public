@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WildStar.TestBed
+namespace EldanToolkit.WildStar.TestBed
 {
-    public enum UserDataKey
-    {
-        ColumnUnknown2,
-        ColumnUnknown3,
-        TextTableCode,
-        TextTableDescription
-    }
+	public enum UserDataKey
+	{
+		ColumnUnknown2,
+		ColumnUnknown3,
+		TextTableCode,
+		TextTableDescription
+	}
 }

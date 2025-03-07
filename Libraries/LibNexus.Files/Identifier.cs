@@ -1,8 +1,8 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.IO;
 
-namespace LibNexus.Files;
+namespace EldanToolkit.Libraries.LibNexus.Files;
 
 public readonly struct Identifier : IEquatable<Identifier>
 {

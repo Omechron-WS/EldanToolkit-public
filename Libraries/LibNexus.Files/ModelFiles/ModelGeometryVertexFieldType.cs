@@ -1,4 +1,4 @@
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 public enum ModelGeometryVertexFieldType : byte
 {

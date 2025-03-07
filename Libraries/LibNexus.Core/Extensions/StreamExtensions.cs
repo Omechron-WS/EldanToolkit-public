@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace LibNexus.Core.Extensions;
+namespace EldanToolkit.Libraries.LibNexus.Core.Extensions;
 
 public static class StreamExtensions
 {
@@ -44,7 +44,7 @@ public static class StreamExtensions
 
 	public static string ReadWord(this Stream stream)
 	{
-		return Encoding.ASCII.GetString(ReadBytes(stream, sizeof(uint)).Reverse().ToArray());
+		return Encoding.ASCII.GetString(stream.ReadBytes(sizeof(uint)).Reverse().ToArray());
 	}
 
 	public static string ReadString(this Stream stream, ulong? length = null)

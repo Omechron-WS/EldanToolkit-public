@@ -1,5 +1,5 @@
-﻿using LibNexus.Core;
-using LibNexus.Core.Extensions;
+﻿using EldanToolkit.Libraries.LibNexus.Core;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LibNexus.Files.PackFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.PackFiles;
 
 public class Pack : IDisposable
 {

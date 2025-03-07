@@ -1,6 +1,5 @@
-﻿using EldanToolkit.Libraries.LibNexus.Files;
-using LibNexus.Core.Extensions;
-using LibNexus.Files.ModelFiles;
+﻿using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
 using SharpCompress.Compressors.Xz;
 using System;
 using System.Collections.Generic;

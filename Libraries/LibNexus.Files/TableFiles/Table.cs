@@ -1,10 +1,11 @@
-using LibNexus.Core.Extensions;
-using LibNexus.Core.Streams;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Core.Streams;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace LibNexus.Files.TableFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
 public abstract class Table
 {

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace LibNexus.Core.Streams;
+namespace EldanToolkit.Libraries.LibNexus.Core.Streams;
 
 public class SegmentStream : Stream
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 [Flags]
 public enum ModelGeometryVertexFlags : ushort

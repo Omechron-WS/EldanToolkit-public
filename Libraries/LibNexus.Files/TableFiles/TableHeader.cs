@@ -1,7 +1,8 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
 using System.IO;
 
-namespace LibNexus.Files.TableFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
 public class TableHeader
 {

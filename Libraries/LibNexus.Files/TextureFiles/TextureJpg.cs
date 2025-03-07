@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LibNexus.Files.TextureFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TextureFiles;
 
 // TODO refactor
 public static class TextureJpg
@@ -22,7 +22,7 @@ public static class TextureJpg
 			var bitPosition = _position % 8;
 			bitPosition = 7 - bitPosition;
 
-			var ret = (byte)((_data[bytePosition] & (1 << bitPosition)) >> bitPosition);
+			var ret = (byte)((_data[bytePosition] & 1 << bitPosition) >> bitPosition);
 			++_position;
 
 			return ret;
@@ -230,7 +230,7 @@ public static class TextureJpg
 
 			for (uint i = 0; i < numValues; i++)
 			{
-				var mixed = ((long)(length + 1) << 32) | code;
+				var mixed = (long)(length + 1) << 32 | code;
 				table[mixed] = values[curIndex++];
 				code++;
 			}
@@ -538,7 +538,7 @@ public static class TextureJpg
 		return colors;
 	}
 
-	private static byte[][] DecodeColorBlockFormat2(short[] lum0, short[]lum1, short[] chrom0, short[] chrom1)
+	private static byte[][] DecodeColorBlockFormat2(short[] lum0, short[] lum1, short[] chrom0, short[] chrom1)
 	{
 		var colors = new byte[8 * 8][];
 
@@ -627,7 +627,7 @@ public static class TextureJpg
 				continue;
 			}
 
-			idx += (acCodedValue >> 4) & 0xF;
+			idx += acCodedValue >> 4 & 0xF;
 			var acLength = (byte)(acCodedValue & 0xF);
 			epsilon = stream.ReadBits(acLength);
 			var acValue = Extend(epsilon, acLength);
@@ -651,7 +651,7 @@ public static class TextureJpg
 				word |= stream.ReadBit();
 				wordLength++;
 
-				var mixed = ((long)wordLength << 32) | word;
+				var mixed = (long)wordLength << 32 | word;
 
 				if (table.TryGetValue(mixed, out var itr))
 					return itr;
@@ -668,7 +668,7 @@ public static class TextureJpg
 
 	private static short Extend(ushort value, ushort length)
 	{
-		return value < 1 << (length - 1) ? (short)(value + (-1 << length) + 1) : (short)value;
+		return value < 1 << length - 1 ? (short)(value + (-1 << length) + 1) : (short)value;
 	}
 
 	private static void UnZigZag(short[] block)

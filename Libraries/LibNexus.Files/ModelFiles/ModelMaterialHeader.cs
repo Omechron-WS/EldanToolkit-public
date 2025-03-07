@@ -1,7 +1,7 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System.IO;
 
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 public class ModelMaterialHeader
 {
@@ -10,7 +10,7 @@ public class ModelMaterialHeader
 	public ulong Layers { get; }
 	public ulong LayersOffset { get; }
 
-    public ModelMaterialHeader(Stream stream)
+	public ModelMaterialHeader(Stream stream)
 	{
 		stream.ReadBytes(32); // TODO
 		Layers = stream.ReadUInt64();

@@ -1,12 +1,11 @@
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Streams;
 using EldanToolkit.Libraries.LibNexus.Files;
-using EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
-using LibNexus.Core.Extensions;
-using LibNexus.Core.Streams;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 public class Model
 {
@@ -31,10 +30,10 @@ public class Model
 		using var dataStream = new SegmentStream(stream);
 
 		if (_header.Unk2.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk2), _header.Unk2.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk2), _header.Unk2.Offset);
 
-            for (var i = 0UL; i < _header.Unk2.Count; i++)
+			for (var i = 0UL; i < _header.Unk2.Count; i++)
 			{
 				stream.ReadBytes(112); // TODO
 				dataStream.SkipPadding(16);
@@ -56,10 +55,10 @@ public class Model
 		FileFormatException.ThrowIf<Model>(nameof(_header.Unk15), _header.Unk15.Count != 0 && Debug);
 
 		if (_header.Unk16.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk16), _header.Unk16.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk16), _header.Unk16.Offset);
 
-            for (var i = 0UL; i < _header.Unk16.Count; i++)
+			for (var i = 0UL; i < _header.Unk16.Count; i++)
 			{
 				var unk1 = dataStream.ReadUInt16(); // TODO
 				var unk2 = dataStream.ReadUInt16(); // TODO
@@ -79,28 +78,28 @@ public class Model
 		FileFormatException.ThrowIf<Model>(nameof(_header.Unk24), _header.Unk24.Count != 0 && Debug);
 
 		if (_header.Bones.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Bones), _header.Bones.Offset);
-            Bones = ReadBones(dataStream);
-        }
+		{
+			Goto(dataStream, nameof(_header.Bones), _header.Bones.Offset);
+			Bones = ReadBones(dataStream);
+		}
 
 		FileFormatException.ThrowIf<Model>(nameof(_header.Unk26), _header.Unk26.Count != 0 && Debug);
 		FileFormatException.ThrowIf<Model>(nameof(_header.Unk27), _header.Unk27.Count != 0 && Debug);
 
 		if (_header.Unk28.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk28), _header.Unk28.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk28), _header.Unk28.Offset);
 
-            for (var i = 0UL; i < _header.Unk28.Count; i++)
+			for (var i = 0UL; i < _header.Unk28.Count; i++)
 				stream.ReadUInt16(); // TODO Bone related?
 
 			dataStream.SkipPadding(16);
 		}
 
 		if (_header.Textures.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Textures), _header.Textures.Offset);
-            Textures = ReadTextures(dataStream);
+		{
+			Goto(dataStream, nameof(_header.Textures), _header.Textures.Offset);
+			Textures = ReadTextures(dataStream);
 		}
 
 		FileFormatException.ThrowIf<Model>(nameof(_header.Unk30), _header.Unk30.Count != 0 && Debug);
@@ -133,10 +132,10 @@ public class Model
 		}
 
 		if (_header.Unk40.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk40), _header.Unk40.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk40), _header.Unk40.Offset);
 
-            for (var i = 0UL; i < _header.Unk40.Count; i++)
+			for (var i = 0UL; i < _header.Unk40.Count; i++)
 			{
 				stream.ReadBytes(96); // TODO
 				dataStream.SkipPadding(16);
@@ -144,14 +143,14 @@ public class Model
 		}
 
 		if (_header.Lights.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Lights), _header.Lights.Offset);
+		{
+			Goto(dataStream, nameof(_header.Lights), _header.Lights.Offset);
 			Lights = ReadLights(dataStream);
 		}
 
 		if (_header.Unk42.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk42), _header.Unk42.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk42), _header.Unk42.Offset);
 
 			for (var i = 0UL; i < _header.Unk42.Count; i++)
 				stream.ReadBytes(96); // TODO
@@ -160,8 +159,8 @@ public class Model
 		}
 
 		if (_header.Unk43.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk43), _header.Unk43.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk43), _header.Unk43.Offset);
 
 			for (var i = 0UL; i < _header.Unk43.Count; i++)
 				stream.ReadBytes(4); // TODO
@@ -170,8 +169,8 @@ public class Model
 		}
 
 		if (_header.Unk44.Count != 0)
-        {
-            Goto(dataStream, nameof(_header.Unk44), _header.Unk44.Offset);
+		{
+			Goto(dataStream, nameof(_header.Unk44), _header.Unk44.Offset);
 
 			var headers = new List<(ulong Count1, ulong Offset1, ulong Count2, ulong Offset2, ulong Count3, ulong Offset3, ulong Count4, ulong Offset4)>();
 
@@ -193,15 +192,15 @@ public class Model
 				bodyStream.ReadBytes(header.Count1 * 16); // TODO
 				bodyStream.SkipPadding(16);
 
-                Goto(bodyStream, nameof(header.Offset2), header.Offset2);
+				Goto(bodyStream, nameof(header.Offset2), header.Offset2);
 				bodyStream.ReadBytes(header.Count2 * 12); // TODO
 				bodyStream.SkipPadding(16);
 
-                Goto(bodyStream, nameof(header.Offset3), header.Offset3);
+				Goto(bodyStream, nameof(header.Offset3), header.Offset3);
 				bodyStream.ReadBytes(header.Count3 * 4); // TODO
 				bodyStream.SkipPadding(16);
 
-                Goto(bodyStream, nameof(header.Offset4), header.Offset4);
+				Goto(bodyStream, nameof(header.Offset4), header.Offset4);
 				bodyStream.ReadBytes(header.Count4 * 20); // TODO
 				bodyStream.SkipPadding(16);
 			}
@@ -210,16 +209,16 @@ public class Model
 		FileFormatException.ThrowIf<Model>(nameof(_header.Unk45), _header.Unk45.Count != 0 && Debug);
 
 		FileFormatException.ThrowIf<Model>(nameof(dataStream), dataStream.Position != dataStream.Length && Debug);
-    }
+	}
 
-    public static void Goto(Stream stream, string field, ulong position)
-    {
+	public static void Goto(Stream stream, string field, ulong position)
+	{
 		stream.Goto<Model>(field, position, Debug);
-    }
+	}
 
-    private ModelBone[] ReadBones(SegmentStream stream)
-    {
-        Goto(stream, nameof(_header.Bones), _header.Bones.Offset);
+	private ModelBone[] ReadBones(SegmentStream stream)
+	{
+		Goto(stream, nameof(_header.Bones), _header.Bones.Offset);
 
 		var headers = new ModelBoneHeader[_header.Bones.Count];
 
@@ -242,8 +241,8 @@ public class Model
 	}
 
 	private ModelTexture[] ReadTextures(Stream stream)
-    {
-        Goto(stream, nameof(_header.Textures), _header.Textures.Offset);
+	{
+		Goto(stream, nameof(_header.Textures), _header.Textures.Offset);
 
 		var headers = new ModelTextureHeader[_header.Textures.Count];
 
@@ -266,8 +265,8 @@ public class Model
 	}
 
 	private ModelMaterial[] ReadMaterials(SegmentStream stream)
-    {
-        Goto(stream, nameof(_header.Materials), _header.Materials.Offset);
+	{
+		Goto(stream, nameof(_header.Materials), _header.Materials.Offset);
 
 		var headers = new ModelMaterialHeader[_header.Materials.Count];
 
@@ -285,7 +284,7 @@ public class Model
 		{
 			var header = headers[i];
 
-            Goto(layersStream, nameof(header.LayersOffset), header.LayersOffset);
+			Goto(layersStream, nameof(header.LayersOffset), header.LayersOffset);
 
 			layers[i] = new ModelMaterialLayer[header.Layers];
 			var layerHeaders = new ModelMaterialLayerHeader[header.Layers];
@@ -325,16 +324,16 @@ public class Model
 	{
 		Goto(stream, nameof(_header.Geometry), _header.Geometry.Offset);
 
-        var geometries = new ModelGeometry[_header.Geometry.Count];
+		var geometries = new ModelGeometry[_header.Geometry.Count];
 
-        using var geometryStream = new SegmentStream(stream);
+		using var geometryStream = new SegmentStream(stream);
 
-        for (var i = 0UL; i < _header.Geometry.Count; i++)
+		for (var i = 0UL; i < _header.Geometry.Count; i++)
 		{
-            var geometry = new ModelGeometry(geometryStream);
-            geometryStream.SkipPadding(16);
+			var geometry = new ModelGeometry(geometryStream);
+			geometryStream.SkipPadding(16);
 			geometries[i] = geometry;
-        }
+		}
 
 		return geometries;
 	}

@@ -1,10 +1,9 @@
-using EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.IO;
 using System.Numerics;
 
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 public class ModelBoneHeader
 {
@@ -22,10 +21,10 @@ public class ModelBoneHeader
 	public AnimationTrackChunk Animation7 { get; set; }
 	public AnimationTrackChunk Animation8 { get; set; }
 
-	public Int16 unk1;
-	public UInt16 unk2;
-    public Int16 unk3;
-    public UInt16 unk4;
+	public short unk1;
+	public ushort unk2;
+	public short unk3;
+	public ushort unk4;
 	public byte[] unk5;
 
 	public ModelBoneHeader(Stream stream)

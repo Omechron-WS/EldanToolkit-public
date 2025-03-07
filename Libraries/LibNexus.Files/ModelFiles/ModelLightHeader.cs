@@ -1,12 +1,11 @@
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using EldanToolkit.Libraries.LibNexus.Files;
-using EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
-using LibNexus.Core.Extensions;
 using System;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 public class ModelLightHeader
 {

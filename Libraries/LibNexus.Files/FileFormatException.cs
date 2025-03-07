@@ -1,6 +1,6 @@
 using System;
 
-namespace LibNexus.Files;
+namespace EldanToolkit.Libraries.LibNexus.Files;
 
 public class FileFormatException : Exception
 {

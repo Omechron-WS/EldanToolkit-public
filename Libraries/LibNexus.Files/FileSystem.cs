@@ -1,8 +1,8 @@
-﻿using LibNexus.Core;
-using LibNexus.Core.Extensions;
-using LibNexus.Core.Streams;
-using LibNexus.Files.ArchiveFiles;
-using LibNexus.Files.IndexFiles;
+﻿using EldanToolkit.Libraries.LibNexus.Core;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Streams;
+using EldanToolkit.Libraries.LibNexus.Files.ArchiveFiles;
+using EldanToolkit.Libraries.LibNexus.Files.IndexFiles;
 using SharpCompress.Compressors.LZMA;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Index = LibNexus.Files.IndexFiles.Index;
+using Index = EldanToolkit.Libraries.LibNexus.Files.IndexFiles.Index;
 
-namespace LibNexus.Files;
+namespace EldanToolkit.Libraries.LibNexus.Files;
 
 public class FileSystem : IDisposable
 {
@@ -245,7 +245,10 @@ public class FileSystem : IDisposable
 
 		var file = new IndexFile
 		{
-			Flags = IndexFileFlags.Complete, CompressedSize = (ulong)data.Length, DecompressedSize = (ulong)data.Length, DateTime = dateTime
+			Flags = IndexFileFlags.Complete,
+			CompressedSize = (ulong)data.Length,
+			DecompressedSize = (ulong)data.Length,
+			DateTime = dateTime
 		};
 
 		if (_directory != null)
@@ -260,8 +263,8 @@ public class FileSystem : IDisposable
 
 			File.WriteAllBytes(localPath, data);
 		}
-        else if(_archive != null)
-        {
+		else if (_archive != null)
+		{
 			using var compressedStream = new MemoryStream();
 			var lep = new LzmaEncoderProperties();
 			using var lzmaStream = new LzmaStream(lep, false, compressedStream);

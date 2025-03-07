@@ -1,6 +1,7 @@
-using LibNexus.Core;
-using LibNexus.Core.Extensions;
-using LibNexus.Files.PackFiles;
+using EldanToolkit.Libraries.LibNexus.Core;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Files.PackFiles;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LibNexus.Files.ArchiveFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ArchiveFiles;
 
 public class Archive : IDisposable
 {

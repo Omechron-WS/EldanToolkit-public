@@ -1,4 +1,4 @@
-﻿using LibNexus.Core.Extensions;
+﻿using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System.IO;
 
 namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles

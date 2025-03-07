@@ -1,6 +1,6 @@
 using System;
 
-namespace LibNexus.Files.TableFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
 // Flags
 // 0x08 => Set on everything except

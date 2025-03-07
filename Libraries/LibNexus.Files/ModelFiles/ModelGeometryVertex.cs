@@ -1,11 +1,12 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 
-namespace LibNexus.Files.ModelFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.ModelFiles;
 
 public class ModelGeometryVertex
 {
@@ -69,13 +70,13 @@ public class ModelGeometryVertex
 				return new Vector3(stream.ReadInt16(), stream.ReadInt16(), stream.ReadInt16()) / 1024f;
 
 			case ModelGeometryVertexFieldType.Vector3ByteXY:
-			{
-				var x = (stream.ReadUInt8() - 127) / 127f;
-				var y = (stream.ReadUInt8() - 127) / 127f;
-				var z = (float)Math.Sqrt(1 - x * x + y * y); // Distance should be 1, sqr(distrance) = 1, so x^2+y^2+z^2 = 1. That means z^2 = 1 - (x^2 + y^2)
+				{
+					var x = (stream.ReadUInt8() - 127) / 127f;
+					var y = (stream.ReadUInt8() - 127) / 127f;
+					var z = (float)Math.Sqrt(1 - x * x + y * y); // Distance should be 1, sqr(distrance) = 1, so x^2+y^2+z^2 = 1. That means z^2 = 1 - (x^2 + y^2)
 
-				return new Vector3(x, y, z);
-			}
+					return new Vector3(x, y, z);
+				}
 
 			default:
 				throw new FileFormatException(typeof(Model), nameof(vertexFieldType));

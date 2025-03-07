@@ -1,6 +1,6 @@
-using LibNexus.Files.TableFiles;
+using EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
-namespace LibNexus.Editor.Tables;
+namespace EldanToolkit.Libraries.LibNexus.Editor.Tables;
 
 public class ModelSequenceRow
 {

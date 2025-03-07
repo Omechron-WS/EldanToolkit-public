@@ -1,6 +1,6 @@
 using System;
 
-namespace LibNexus.Files.IndexFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.IndexFiles;
 
 [Flags]
 public enum IndexFileFlags : uint

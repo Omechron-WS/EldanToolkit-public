@@ -1,6 +1,6 @@
 using System;
 
-namespace LibNexus.Files.TableFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class TableColumnAttribute : Attribute

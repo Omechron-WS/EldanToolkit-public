@@ -1,10 +1,10 @@
-using LibNexus.Core.Extensions;
-using LibNexus.Core.Streams;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Streams;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace LibNexus.Files.TranslationsFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TranslationsFiles;
 
 public class Translation
 {

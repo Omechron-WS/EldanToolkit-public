@@ -1,6 +1,6 @@
 ﻿using CsvHelper.Configuration;
 using CsvHelper;
-using LibNexus.Files.TableFiles;
+using EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 using System.Data;
 using System.Globalization;
 using System.IO;

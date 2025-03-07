@@ -1,7 +1,8 @@
-using LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
 using System.IO;
 
-namespace LibNexus.Files.TextureFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TextureFiles;
 
 public class TextureHeader
 {

@@ -1,9 +1,10 @@
+using EldanToolkit.Project.Tables;
 using Godot;
 using System.IO;
 
 namespace EldanToolkit.Project
 {
-    public partial class Project : Node
+	public partial class Project : Node
     {
         public ProjectFileSystem FileSystem {  get; private set; }
         public TableManager TableManager { get; private set; }

@@ -1,12 +1,13 @@
-using LibNexus.Core.Extensions;
-using LibNexus.Core.Streams;
+using EldanToolkit.Libraries.LibNexus.Core.Extensions;
+using EldanToolkit.Libraries.LibNexus.Files;
+using EldanToolkit.Libraries.LibNexus.Core.Streams;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace LibNexus.Files.TableFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.TableFiles;
 
 public class TableWithRows<T> : Table
 	where T : notnull
@@ -100,18 +101,18 @@ public class TableWithRows<T> : Table
 					break;
 
 				case TableColumnType.String:
-				{
-					var offsetOrZero = DataStream.ReadUInt32();
-					var textOffset = offsetOrZero != 0 ? offsetOrZero : DataStream.ReadUInt32();
-					var unk1 = DataStream.ReadUInt32();
+					{
+						var offsetOrZero = DataStream.ReadUInt32();
+						var textOffset = offsetOrZero != 0 ? offsetOrZero : DataStream.ReadUInt32();
+						var unk1 = DataStream.ReadUInt32();
 
-					rowLength += (ulong)(offsetOrZero != 0 ? 8 : 12);
-					setStrings.Add(strings => property.SetValue(row, strings[textOffset]));
-					value = null;
-					FileFormatException.ThrowIf<Table>(nameof(unk1), unk1 != 0);
+						rowLength += (ulong)(offsetOrZero != 0 ? 8 : 12);
+						setStrings.Add(strings => property.SetValue(row, strings[textOffset]));
+						value = null;
+						FileFormatException.ThrowIf<Table>(nameof(unk1), unk1 != 0);
 
-					break;
-				}
+						break;
+					}
 
 				default:
 					throw new FileFormatException(typeof(T), nameof(column.Type));

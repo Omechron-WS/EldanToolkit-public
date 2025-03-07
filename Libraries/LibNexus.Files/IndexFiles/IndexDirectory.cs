@@ -1,10 +1,10 @@
-﻿using LibNexus.Core.Extensions;
+﻿using EldanToolkit.Libraries.LibNexus.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace LibNexus.Files.IndexFiles;
+namespace EldanToolkit.Libraries.LibNexus.Files.IndexFiles;
 
 public class IndexDirectory
 {
