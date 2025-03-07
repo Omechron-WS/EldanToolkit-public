@@ -28,6 +28,6 @@ public partial class ImportFileEditor : Control
 		ImportFileGeneral.Visible = !ImportFileBroken.Visible;
 		if (ImportFileBroken.Visible) return; // Yup. Dunno what to do.
 
-		ImportFileType.Text = "Import type: " + importFile.type.ToString();
+		ImportFileType.Text = "Import type: " + importFile.convertData?.GetType()?.ToString() ?? "None";
 	}
 }
